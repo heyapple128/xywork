@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>授权校验入群流程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+    padding: 20px 16px;
+    display: flex;
+    justify-content: center;
+  }
+  .container { max-width: 420px; width: 100%; }
+
+  h1 {
+    font-size: 20px;
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  /* Flow layout */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  .node {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 2px solid;
+    position: relative;
+    background: #fff;
+  }
+
+  .node .sub {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+  }
+
+  .blue { background: #e8f4fd; border-color: #93c5fd; color: #1e40af; }
+  .purple { background: #f0ebff; border-color: #c4b5fd; color: #5b21b6; }
+  .yellow { background: #fef9e7; border-color: #fde68a; color: #92400e; }
+  .green { background: #ecfdf5; border-color: #86efac; color: #065f46; }
+  .red { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+
+  .arrow-down {
+    width: 2px; height: 28px;
+    background: #94a3b8;
+    position: relative;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+  .arrow-down::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #94a3b8;
+  }
+
+  .arrow-right {
+    flex: 1;
+    height: 2px;
+    background: #94a3b8;
+    position: relative;
+    align-self: center;
+  }
+  .arrow-right::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: #94a3b8;
+  }
+
+  /* Branch row: three columns */
+  .branch-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    margin-top: -1px;
+  }
+
+  .branch-row .arrow-down-left {
+    flex: 0 0 50%;
+    height: 2px;
+    background: #94a3b8;
+    position: relative;
+    margin-top: 0;
+    align-self: flex-end;
+  }
+
+  .branch-row .arrow-down-right {
+    flex: 0 0 50%;
+    height: 2px;
+    background: #94a3b8;
+    position: relative;
+    align-self: flex-end;
+  }
+
+  .branch-row .arrow-down-v {
+    width: 2px; height: 28px;
+    background: #94a3b8;
+    position: relative;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+  .branch-row .arrow-down-v::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #94a3b8;
+  }
+
+  .branch-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 0;
+  }
+
+  .branch-col .arrow-down-col {
+    width: 2px; height: 28px;
+    background: #94a3b8;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .branch-col .arrow-down-col::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #94a3b8;
+  }
+
+  .branch-col .connect-h {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+  }
+
+  .branch-col .connect-h .bar {
+    flex: 1;
+    height: 2px;
+    background: #94a3b8;
+  }
+
+  .footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>授权校验入群流程</h1>
+  <div class="flow">
+
+    <!-- Step 1 -->
+    <div class="node blue">📤 销售发送小程序链接给客户</div>
+    <div class="arrow-down"></div>
+
+    <!-- Step 2 -->
+    <div class="node blue">📝 客户填写授权人/法人/运营财务人员
+      <div class="sub">姓名 · 手机号 · 身份证号 · 角色</div>
+    </div>
+    <div class="arrow-down"></div>
+
+    <!-- Step 3 -->
+    <div class="node blue">🔄 信息推送至业务中台系统</div>
+    <div class="arrow-down"></div>
+
+    <!-- Step 4a -->
+    <div class="node purple">💻 业务中台系统采集<br>客户管理系统授权人/法人信息</div>
+    <div class="arrow-down"></div>
+
+    <!-- Step 4b -->
+    <div class="node purple">💻 在业务中台系统内<br>比对校验</div>
+    <div class="arrow-down"></div>
+
+    <!-- Decision -->
+    <div class="node yellow" style="max-width:200px; border-radius: 8px; transform: rotate(0); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); padding: 40px 20px;">
+      <strong>信息是否匹配？</strong>
+    </div>
+
+    <!-- Branch arrows -->
+    <div style="width:100%; height:2px; background:#94a3b8; position:relative; margin-top:-1px;">
+      <span style="position:absolute; left:15%; top:-18px; font-size:11px; color:#16a34a; font-weight:500;">✓ 匹配</span>
+      <span style="position:absolute; right:15%; top:-18px; font-size:11px; color:#dc2626; font-weight:500;">✗ 不匹配</span>
+    </div>
+
+    <!-- Branch row -->
+    <div class="branch-row" style="margin-top:-1px;">
+      <div class="arrow-down-left"></div>
+      <div style="width:2px; height:28px; background:#94a3b8; position:relative; flex-shrink:0;">
+        <div style="position:absolute; bottom:-1px; left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color:#94a3b8;"></div>
+      </div>
+      <div class="arrow-down-right"></div>
+    </div>
+
+    <!-- Two branches -->
+    <div class="branch-row">
+      <div class="branch-col">
+        <div class="node green" style="width:90%;">✅ 匹配成功<br><strong>自动通过</strong></div>
+        <div class="arrow-down-col"></div>
+      </div>
+      <div class="branch-col">
+        <div class="node red" style="width:90%;">❌ 匹配失败<br><strong>人工复核</strong></div>
+        <div class="arrow-down-col"></div>
+      </div>
+    </div>
+
+    <!-- Merge arrows -->
+    <div style="width:100%; display:flex; align-items:center; position:relative; height:30px;">
+      <div style="flex:0 0 48%; height:2px; background:#94a3b8;"></div>
+      <div style="width:2px; height:30px; background:#94a3b8; position:relative; flex-shrink:0;">
+        <div style="position:absolute; bottom:-1px; left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color:#94a3b8;"></div>
+      </div>
+      <div style="flex:0 0 48%; height:2px; background:#94a3b8;"></div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="node blue">🎫 企微生成入群二维码<br>自动推送至用户</div>
+
+  </div>
+  <div class="footer">授权校验入群流程 · 业务流程图</div>
+</div>
+</body>
+</html>
