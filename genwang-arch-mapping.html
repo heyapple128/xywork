@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>根网盈通 北向DMA系统架构 → 功能映射图</title>
+<style>
+  body { margin: 0; padding: 20px; font-family: -apple-system, sans-serif; background: #f5f5f5; }
+  h1 { text-align: center; color: #333; font-size: 1.4em; margin: 0 0 4px 0; }
+  .sub { text-align: center; color: #888; font-size: 0.85em; margin-bottom: 16px; }
+  iframe { width: 100%; height: calc(100vh - 120px); border: 1px solid #ddd; border-radius: 8px; background: white; }
+</style>
+</head>
+<body>
+<h1>根网盈通 北向DMA系统架构 → 功能映射图</h1>
+<p class="sub">蓝色=客户接入 · 橙色=代理中转 · 紫色=核心业务 · 绿色=境内执行 · 粉框=根网独有(同余无)</p>
+<iframe id="frame" src=""></iframe>
+<script>
+const jsonData = document.createElement('script');
+jsonData.src = 'genwang-arch-mapping.excalidraw';
+document.head.appendChild(jsonData);
+
+fetch('genwang-arch-mapping.excalidraw')
+  .then(r => r.json())
+  .then(data => {
+    const encoded = encodeURIComponent(JSON.stringify(data));
+    document.getElementById('frame').src = `https://excalidraw.com/#json=${encoded}`;
+  });
+</script>
+</body>
+</html>
