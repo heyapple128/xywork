@@ -42,6 +42,8 @@ xywork/
 ├── genwang-arch-mapping.svg               # 架构图 (SVG, 可直接查看)
 ├── genwang-arch-mapping.excalidraw        # 架构图源文件 (可编辑)
 ├── genwang-arch-mapping.html              # 架构图网页版
+├── genwang-arch/
+│   └── index.html                         # 架构图网页版（GitHub Pages, 内网可访问）
 └── auth-flow/
     ├── index.html                         # 授权入群流程图网页版
     └── 授权校验入群流程.png               # 授权入群流程图
